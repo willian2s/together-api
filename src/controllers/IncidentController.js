@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const connection = require('../database/connection')
 
 module.exports = {
