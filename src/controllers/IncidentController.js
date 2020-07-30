@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const connection = require('../database/connection')
 
 module.exports = {
@@ -8,7 +7,7 @@ module.exports = {
     const [count] = await connection('incidents').count()
 
     const incidents = await connection('incidents')
-      .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
+      .join('ongs', 'ongs.id', '=', 'incidents.ongId')
       .limit(5)
       .offset((page - 1) * 5)
       .select([
@@ -28,13 +27,13 @@ module.exports = {
   async create (req, res) {
     const { title, description, value } = req.body
 
-    const ong_id = req.headers.authorization
+    const ongId = req.headers.authorization
 
     const [id] = await connection('incidents').insert({
       title,
       description,
       value,
-      ong_id
+      ongId
     })
 
     return res.json({ id })
@@ -42,14 +41,14 @@ module.exports = {
 
   async delete (req, res) {
     const { id } = req.params
-    const ong_id = req.headers.authorization
+    const ongId = req.headers.authorization
 
     const incidents = await connection('incidents')
       .where('id', id)
-      .select('ong_id')
+      .select('ongId')
       .first()
 
-    if (incidents.ong_id !== ong_id) {
+    if (incidents.ongId !== ongId) {
       return res.status(401).json({ error: 'Operation not permitted.' })
     }
 
