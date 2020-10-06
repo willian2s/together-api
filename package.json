@@ -16,7 +16,6 @@
     "knex": "^0.21.2",
     "sqlite3": "^5.0.0",
     "nodemon": "^2.0.4"
-
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
